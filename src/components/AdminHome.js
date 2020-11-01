@@ -5,7 +5,7 @@ import history from './../history';
         history.push("/addNewBlog")
      }
      viewAllBlogs(Event) {
-         history.push("/viewAllBlogs")
+         history.push("/viewAdminBlog")
      }
      render() {
          return (

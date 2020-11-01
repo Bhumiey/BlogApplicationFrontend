@@ -1,15 +1,21 @@
 import React, { Component } from "react";
-import axios from "axios"
+import axios from "axios";
+import history from "./../history"
 const api = axios.create({
     baseURL: `http://localhost:8080/blog`
   })
 class Newblog extends Component {
-    state = {
-        blogTitle: '',
-        author: '',
-        category: '',
-        blogContent: '',
+    constructor(props) {
+        super(props)
+        this.state = {
+            blogTitle: '',
+            author: '',
+            category: '',
+            blogContent: '',
+        }
+        this.postBlog = this.postBlog.bind(this)
     }
+    
     handleTitleChange(Event) {
         this.setState({
             blogTitle: Event.target.value
@@ -31,19 +37,22 @@ class Newblog extends Component {
     }
     postBlog(event) {
         event.preventDefault();
-        const newBlog = {
-            
-            blogCategory: {
-                categoryName: this.state.category
-            },
-            blogContent: this.state.blogContent,
-            blogAuthor: {
-                authorName: this.state.author
-            },
-            blogTitle : this.state.blogTitle,
+        const headers = {
+            'Content-Type' : 'text/plain'
         };
-        api.post("/addBlog",{newBlog}).then(res => {
-            console.log(res);
+        api.post("/addBlog",{
+            blogTitle: this.state.category,
+            blogAuthor:{
+                authorName: this.state.author,
+            },
+            blogCategory: {
+                categoryName: this.state.category,
+            },
+            blogContent: this.state.blogContent
+        },
+        {headers}).then(res => {
+            window.alert("New Post added !")
+            history.push("/adminhome")
         })
     }
     render() {
@@ -52,29 +61,29 @@ class Newblog extends Component {
                 <form onSubmit={this.postBlog}>
                     <div className="formInput">
                     <label>
-                        Blog Title
+                        Blog Title: 
                         <input type="text" name="title" value={this.state.blogTitle} onChange={this.handleTitleChange.bind(this)}></input>
                     </label>
                     </div>
                     <div className="formInput">
                     <label>
-                        Blog Category
+                        Blog Category: 
                         <input type="text" name="category" value={this.state.category} onChange={this.handleCategoryChange.bind(this)}></input>
                     </label>
                     </div>
                     <div className="formInput">
                     <label>
-                        Blog Author 
+                        Blog Author: 
                         <input type="text" name="author" value={this.state.author} onChange={this.handleAuthorChange.bind(this)}></input>
                     </label>
                     </div>
                     <div className="formInput">
                     <label>
-                        Blog Content
+                        Blog Content: 
                         <input type="text"  name="content" value={this.state.blogContent} onChange={this.handleContentChange.bind(this)}></input>
                     </label>
                     </div>
-                    <button type="submit">Post</button>
+                    <button className="postButton "type="submit">Post</button>
                 </form>
             </div>
         );

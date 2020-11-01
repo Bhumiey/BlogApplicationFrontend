@@ -38,7 +38,7 @@
 }
 
 .AdminButton {
-  display: flex;
+  display: inline-block;
   align-self: flex-end;
   padding: 20px;
   margin-right: 15px;
@@ -46,11 +46,49 @@
   padding-left: 30px;
   padding-right: 30px;
 }
+.HomeButton{
+   display: inline-block;
+   padding: 20px; 
+  margin-right: 15px;
+  margin-top: 15px;
+ padding-left: 30px;
+  padding-right: 30px; 
+}
 .BlogButton {
   width: 300px;
   height: 100px;
   margin: 10px;
+  background-color: #c6cad2;
 }
 .formInput {
   margin:20px;
+}
+.blogDelete {
+  background: #282c34;
+  color: white;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+.postButton{
+  background: #282c34;
+  color: white;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+.buttonsSpan{
+  justify-items: flex-end;
+  align-self: flex-end;
+}
+.blogBox{
+  border-width: 1;
+  border-style: solid;
+  background-color: #c6cad2;
+}
+.NewBlog{
+  border-style: solid;
+  display: inline-block;
+  width: 500px;
+  margin-top: 20px;
+  height: max-content;
+  
 }
